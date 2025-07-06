@@ -1,4 +1,3 @@
-# main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
@@ -16,9 +15,10 @@ class DiabetesInput(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "Diabetes Prediction API is live"}
+    return {"message": "Diabetes Prediction API v1 & v2 are live"}
 
-@app.post("/predict")
+@app.post("/v1/predict")
+@app.post("/v2/predict")  # 👈 Duplicate the same logic for v2
 def predict(data: DiabetesInput):
     input_data = np.array([[data.Pregnancies, data.Glucose, data.BloodPressure, data.BMI, data.Age]])
     prediction = model.predict(input_data)[0]
