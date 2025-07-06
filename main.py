@@ -15,10 +15,10 @@ class DiabetesInput(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "Diabetes Prediction API v1 & v2 are live"}
+    return {"message": "Diabetes Prediction API is live"}
 
 @app.post("/v1/predict")
-@app.post("/v2/predict")  # 👈 Duplicate the same logic for v2
+@app.post("/v2/predict")
 def predict(data: DiabetesInput):
     input_data = np.array([[data.Pregnancies, data.Glucose, data.BloodPressure, data.BMI, data.Age]])
     prediction = model.predict(input_data)[0]
